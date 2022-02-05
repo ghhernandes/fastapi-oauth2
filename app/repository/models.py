@@ -1,10 +1,13 @@
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+import datetime
 
 Base = declarative_base()
 
-class Project(Base):
-    __tablename__ = 'projects'
+class User(Base):
+    __tablename__ = "users"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    description = Column(String)
+    nickname = Column(String(20))
+    fullname = Column(String(100))
+    password = Column(String(255))
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)

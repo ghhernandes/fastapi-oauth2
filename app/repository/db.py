@@ -1,12 +1,12 @@
-from sqlalchemy.orm import sessionmaker
+
+
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
 
 from .models import Base
 
-class Database:
-    def __init__(self):
+class DB:
+    def __init__(self) -> None:
         self.engine = create_engine('sqlite:///:memory:')
-        self.Session = sessionmaker(bind=self.engine)
-
-    def create_tables(self):        
         Base.metadata.create_all(self.engine)
+        self.LocalSession: Session = sessionmaker(bind=self.engine)
